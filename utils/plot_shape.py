@@ -21,3 +21,4 @@ def plot_shape_3d(ax, point, color):
                 l_plot = np.linspace(point[:, ii], point[:, jj], num = 50)
                 ax.plot(l_plot[: ,0], l_plot[: ,1], l_plot[: ,2], c=color)
     return
+

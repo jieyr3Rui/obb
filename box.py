@@ -3,7 +3,7 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 from utils.rotate import rotate
 from utils.get_len import get_len
-from utils.plot_point import plot_shape_3d, get_point_3d
+from utils.plot_shape import plot_shape_3d, get_point_3d
 
 class box_3d():
     def __init__(self):
@@ -15,10 +15,10 @@ class box_3d():
         self.axises = np.zeros([3, 1])
     
     def update(self, p, sha, pos, point):
-        self.p = p
-        self.sha = sha
-        self.pos = pos
-        self.point = point
+        self.p = np.array(p)
+        self.sha = np.array(sha)
+        self.pos = np.array(pos)
+        self.point = np.array(point)
         return
 
     def get_by_axis(self, x, y, z, pitch, roll, yaw, L, W, H, n):

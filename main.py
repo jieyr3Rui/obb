@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 from box import box_3d
-from utils.plot_point import plot_shape_3d, get_point_3d
+from utils.plot_shape import plot_shape_3d, get_point_3d
 from obb import obb_3d_check
 
 if __name__ == '__main__':
