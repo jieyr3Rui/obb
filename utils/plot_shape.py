@@ -22,3 +22,10 @@ def plot_shape_3d(ax, point, color):
                 ax.plot(l_plot[: ,0], l_plot[: ,1], l_plot[: ,2], c=color)
     return
 
+def plot_poly(ax, point, color):
+    n = point.shape[1]
+    for ii in range(n-1):
+        l_plot = np.linspace(point[:, ii], point[:, ii+1], num = 50)
+        ax.plot(l_plot[: ,0], l_plot[: ,1], l_plot[: ,2], c=color)
+    l_plot = np.linspace(point[:, n-1], point[:, 0], num = 50)
+    ax.plot(l_plot[: ,0], l_plot[: ,1], l_plot[: ,2], c=color)

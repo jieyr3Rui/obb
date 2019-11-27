@@ -43,12 +43,16 @@ def sort_points_tan(p, pk):
     return p_out
 
 def convex_hull(point):
+    # input  [[x1, x2, x3], 
+    #        [y1, y2, y3]]
+    # need   [[x1, y1],
+    #         [x2, y2],
+    #         [x3, y3]]
     point = point.T
-    print(point.shape)
+    # transform to list[tuple]
     p = []
     for ii in range(point.shape[0]):
         p.append(tuple(totuple(i) for i in point[ii]))
-    print(p)
     p=list(set(p))
     k = get_leftbottompoint(p)
     pk = p[k]
@@ -62,15 +66,11 @@ def convex_hull(point):
     for i in range(1, len(p_sort)):
         while(multiply(p_result[-2], p_sort[i],p_result[-1]) > 0):
             p_result.pop()
-        p_result.append(p_sort[i])    
+        p_result.append(p_sort[i])
+    # output [[x1, x2, x3],
+    #         [y1, y2, y3]]
     return np.array(p_result).T
 
+def polygon_check(p1, p2):
 
-
-
-
-# if __name__ == '__main__':
-#     pass
-    
-#     print(convex_hull(np.array([[1, 3, 3, 5],[3, 4, 5, 2]])))
-
+    return
