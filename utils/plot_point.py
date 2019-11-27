@@ -11,7 +11,7 @@ def get_point_3d(p, L, W, H, x, y, z):
     point[2] += z
     return point
 
-def plot_point_3d(ax, point):
+def plot_shape_3d(ax, point, color):
     for ii in range(0,8):
         for jj in range(ii+1,8):
             c = 0
@@ -19,4 +19,5 @@ def plot_point_3d(ax, point):
                 c += (check[ii][kk] != check[jj][kk])
             if c == 1:
                 l_plot = np.linspace(point[:, ii], point[:, jj], num = 50)
-                ax.plot(l_plot[: ,0], l_plot[: ,1], l_plot[: ,2], c='r')
+                ax.plot(l_plot[: ,0], l_plot[: ,1], l_plot[: ,2], c=color)
+    return
