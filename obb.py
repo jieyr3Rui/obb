@@ -22,7 +22,7 @@ def obb_3d_check_face(o1, o2):
     # o1_poly_point_in_word = np.zeros([3,1])
     # o2_poly_point_in_word = np.zeros([3,1])
 
-    
+   
     for face in range(3):
         jj = 0
         o1_poly_input = np.zeros([2, o1_point_in_o1.shape[1]])
@@ -54,14 +54,26 @@ def obb_3d_check_face(o1, o2):
 
         o1_poly_in_word = np.dot(o1.p, o1_poly_in_word) + np.array(np.tile(pos,(1,sha1)).reshape([sha1,3])).T
         o2_poly_in_word = np.dot(o1.p, o2_poly_in_word) + np.array(np.tile(pos,(1,sha2)).reshape([sha2,3])).T
-        
 
-        ax = plt.figure().add_subplot(111, projection = '3d')
+        check = ''
+        if polygon_check(o1_poly_in_o1, o2_poly_in_o1) == True:
+            check = 'true'
+        else:
+            check = 'false'
+
+        ax = plt.subplot(2,3,(face+1), projection = '3d')
         o1.plot_shape(ax, 'r')
         o2.plot_shape(ax, 'g')
-        plot_poly(ax, o1_poly_in_word, 'b')
-        plot_poly(ax, o2_poly_in_word, 'y')
-        plt.show()
+        o1.plot_scatter(ax, 'r')
+        o2.plot_scatter(ax, 'g')
+        plot_poly(ax, o1_poly_in_word, 'b', d='3d')
+        plot_poly(ax, o2_poly_in_word, 'y', d='3d')
+        ax = plt.subplot(2,3,(face+4))
+        plot_poly(ax, o1_poly_in_o1, 'b', d='2d')
+        plot_poly(ax, o2_poly_in_o1, 'y', d='2d')
+        plt.title('polygon check reslut: ' +  check)
+
+    plt.show()
 
     
     return

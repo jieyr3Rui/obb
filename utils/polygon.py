@@ -1,5 +1,6 @@
 import math
 import numpy as np
+from utils.check_point_in import is_point_in_polygon
 
 def totuple(a):
     try:
@@ -72,5 +73,17 @@ def convex_hull(point):
     return np.array(p_result).T
 
 def polygon_check(p1, p2):
-
-    return
+    sha1 = p1.shape[1]
+    sha2 = p2.shape[1]
+    p = np.zeros([2, sha1*sha2])
+    #print('sha: ',sha1, sha2)
+    for ii in range(sha1):
+        for jj in range(sha2):
+            #print('ii jj = ', ii, jj)
+            #print(ii*sha1 + jj)
+            p[:, ii*sha2 + jj] = p1[:, ii] - p2[:, jj]
+    
+    poly = np.zeros([1, 2, sha1 * sha2])
+    poly[0] = p
+    
+    return is_point_in_polygon(np.array([0,0]), poly, False)

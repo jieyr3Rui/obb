@@ -14,7 +14,7 @@ if __name__ == '__main__':
     o1.plot_scatter(ax, 'b')
 
     o2 = box_3d()
-    o2.get_by_axis(-2,0,-3, 1.2,-0.1,0.7, 3,1,3, 100)
+    o2.get_by_axis(1,2,3, 1.2,-0.1,0.7, 3,1,3, 100)
     o2.plot_shape(ax, 'r')
     o2.plot_scatter(ax, 'b')
 
