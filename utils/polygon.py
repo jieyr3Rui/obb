@@ -83,7 +83,8 @@ def polygon_check(p1, p2):
             #print(ii*sha1 + jj)
             p[:, ii*sha2 + jj] = p1[:, ii] - p2[:, jj]
     
-    poly = np.zeros([1, 2, sha1 * sha2])
+    p = convex_hull(p)
+    poly = np.zeros([1, 2, p.shape[1]])
     poly[0] = p
     
-    return is_point_in_polygon(np.array([0,0]), poly, False)
+    return p, is_point_in_polygon(np.array([0,0]), poly, False)

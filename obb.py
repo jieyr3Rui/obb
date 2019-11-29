@@ -54,12 +54,8 @@ def obb_3d_check_face(o1, o2):
 
         o1_poly_in_word = np.dot(o1.p, o1_poly_in_word) + np.array(np.tile(pos,(1,sha1)).reshape([sha1,3])).T
         o2_poly_in_word = np.dot(o1.p, o2_poly_in_word) + np.array(np.tile(pos,(1,sha2)).reshape([sha2,3])).T
-
-        check = ''
-        if polygon_check(o1_poly_in_o1, o2_poly_in_o1) == True:
-            check = 'true'
-        else:
-            check = 'false'
+        p, result = polygon_check(o1_poly_in_o1, o2_poly_in_o1)
+        check = 'true' if result == True else 'false'
 
         ax = plt.subplot(2,3,(face+1), projection = '3d')
         o1.plot_shape(ax, 'r')
@@ -71,7 +67,10 @@ def obb_3d_check_face(o1, o2):
         ax = plt.subplot(2,3,(face+4))
         plot_poly(ax, o1_poly_in_o1, 'b', d='2d')
         plot_poly(ax, o2_poly_in_o1, 'y', d='2d')
+        plot_poly(ax, p,              'r',d='2d')
         plt.title('polygon check reslut: ' +  check)
+        plt.grid()
+        
 
     plt.show()
 
