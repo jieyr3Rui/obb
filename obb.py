@@ -77,8 +77,19 @@ def obb_3d_check_line(o1, o2):
             #print(p)
             _, m1, __ = get_len(np.dot(p, o1.point - np.array(np.tile(pos,(1,8)).reshape([8,3])).T))
             _, m2, __ = get_len(np.dot(p, o2.point - np.array(np.tile(pos,(1,8)).reshape([8,3])).T))
-            # if ((m1[0] < m2[1]) & (m1[0] > m2[0])) | ((m1[1] < m2[1]) & (m1[1] > m2[0])):
-            
+            if ((m1[0] < m2[1]) & (m1[0] > m2[0])) & (m1[1] > m2[1]):
+                m1 = 0
+            elif ((m2[0] < m1[1]) & (m2[0] > m1[0])) & (m2[1] > m1[1]):
+                m1 = 0
+
+            elif (m1[0] < m2[0]) & (m1[1] > m2[1]):
+                m1 = 0
+            elif (m2[0] < m1[0]) & (m2[1] > m1[1]):
+                m1 = 0
+            elif (m1[0] > m2[1]):
+                m1 = 0
+            elif (m2[0] > m1[1]):
+                m1 = 0
             # else:
 
 
