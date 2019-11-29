@@ -1,13 +1,21 @@
 import operator
 
-def get_len(axises, channel, row_or_col=0):
+def get_len(matrix, command='vector', channel=0):
     # row
-    if row_or_col == 0:
-        index_max, max_ =  max(enumerate(axises[channel]), key=operator.itemgetter(1))
-        index_min, min_ =  min(enumerate(axises[channel]), key=operator.itemgetter(1))
+    if command == 'row':
+        index_max, max_ =  max(enumerate(matrix[channel]), key=operator.itemgetter(1))
+        index_min, min_ =  min(enumerate(matrix[channel]), key=operator.itemgetter(1))
+        return [index_min, index_max], [min_, max_], ((max_ - min_))
     # col
-    if row_or_col == 1:
-        index_max, max_ =  max(enumerate(axises[channel]), key=operator.itemgetter(1))
-        index_min, min_ =  min(enumerate(axises[channel]), key=operator.itemgetter(1))
+    if command == 'col':
+        index_max, max_ =  max(enumerate(matrix[:, channel]), key=operator.itemgetter(1))
+        index_min, min_ =  min(enumerate(matrix[:, channel]), key=operator.itemgetter(1))
+        return [index_min, index_max], [min_, max_], ((max_ - min_))
 
-    return [index_min, index_max], [min_, max_], ((max_ - min_))
+    # vector
+    if command == 'vector':
+        index_max, max_ =  max(enumerate(matrix), key=operator.itemgetter(1))
+        index_min, min_ =  min(enumerate(matrix), key=operator.itemgetter(1))
+        return [index_min, index_max], [min_, max_], ((max_ - min_))
+        
+    return False

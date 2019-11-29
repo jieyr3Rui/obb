@@ -5,7 +5,7 @@ import numpy as np
 # point:点坐标,如:[113.775698, 30.236892]
 # o : 该条线的起点
 # d : 该条线的终点
-def is_in_line(point, o, d):
+def is_point_in_line(point, o, d):
     # 先判断该点是否在线段范围内,如果不在,
     # 则就算在该方程的直线上但也不在该线段上
     if o[1] > point[1] and d[1] > point[1]:  # 该点纵坐标小于线段最小纵坐标
@@ -78,7 +78,7 @@ def is_point_in_polygon(point_coord, polygon_coords, is_contains_edge):
             destination_point = polygon[i + 1]
  
             # 是否包含存在直线上的点
-            if is_in_line(point_coord, origin_point, destination_point):
+            if is_point_in_line(point_coord, origin_point, destination_point):
                 return True if is_contains_edge else False
  
             if is_ray_intersects_segment(point_coord, origin_point, destination_point):

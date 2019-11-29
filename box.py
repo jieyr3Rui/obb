@@ -40,9 +40,9 @@ class box_3d():
         val, p = np.linalg.eig(cov)
         axises_in_p = np.dot(p.T, axises)
 
-        _, __, L_ = get_len(axises_in_p, 0)
-        _, __, W_ = get_len(axises_in_p, 1)
-        _, __, H_ = get_len(axises_in_p, 2)
+        _, __, L_ = get_len(axises_in_p, 'row', 0)
+        _, __, W_ = get_len(axises_in_p, 'row', 1)
+        _, __, H_ = get_len(axises_in_p, 'row', 2)
         point = get_point_3d( p, L_, W_, H_, x_, y_, z_)
         
         self.update(p, [L_, W_, H_], [x_, y_, z_], point)
