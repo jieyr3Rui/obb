@@ -45,26 +45,24 @@ def obb_3d_check_face(o1, o2):
 
         o1_poly_in_word = np.dot(o1.p, o1_poly_in_word) + np.array(np.tile(pos,(1,sha1)).reshape([sha1,3])).T
         o2_poly_in_word = np.dot(o1.p, o2_poly_in_word) + np.array(np.tile(pos,(1,sha2)).reshape([sha2,3])).T
-        poly_gjk, result = check_intersect_polygon(o1_poly_in_o1, o2_poly_in_o1)
-        check = 'true' if result == True else 'false'
+        poly_gjk, is_intersect = check_intersect_polygon(o1_poly_in_o1, o2_poly_in_o1)
 
-        
         ax = plt.subplot(2,3,(face+1), projection = '3d')
         o1.plot_shape(ax, 'r')
-        o2.plot_shape(ax, 'g')
-        o1.plot_scatter(ax, 'r')
-        o2.plot_scatter(ax, 'g')
-        plot_poly(ax, o1_poly_in_word, 'b', d='3d')
-        plot_poly(ax, o2_poly_in_word, 'y', d='3d')
+        o2.plot_shape(ax, 'b')
+        plot_poly(ax, o1_poly_in_word, 'orange', d='3d')
+        plot_poly(ax, o2_poly_in_word, 'green', d='3d')
         ax = plt.subplot(2,3,(face+4))
-        plot_poly(ax, o1_poly_in_o1, 'b', d='2d')
-        plot_poly(ax, o2_poly_in_o1, 'y', d='2d')
-        plot_poly(ax, poly_gjk,      'r', d='2d')
-        plt.title('polygon check reslut: ' +  check)
+        plot_poly(ax, o1_poly_in_o1, 'orange', d='2d')
+        plot_poly(ax, o2_poly_in_o1, 'green', d='2d')
+        plot_poly(ax, poly_gjk,      'yellow', d='2d')
+        check = 'true' if is_intersect == True else 'false'
+        plt.title('is_intersect = ' +  check)
         plt.grid()
-    
-    plt.show()
 
+    plt.savefig('images_output/check_face.png')
+    plt.show()
+    
     
     return
 
@@ -91,7 +89,12 @@ def obb_3d_check_line(o1, o2):
             plot_line(ax, line_in_world[:, 0], line_in_world[:,1], attr[0])
             plot_line(ax, line_in_world[:, 1], line_in_world[:,2], attr[1])
             plot_line(ax, line_in_world[:, 2], line_in_world[:,3], attr[2])
+            check = 'true' if is_intersect == True else 'false'
+            plt.title('is_intersect = ' +  check)
+
+    plt.savefig('images_output/check_line.png')
     plt.show()
+    
 
 
     return

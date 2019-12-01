@@ -16,7 +16,7 @@ def check_intersect_polygon(p1, p2):
     
     return p, is_point_in_polygon(np.array([0,0]), poly, False)
 
-def check_intersect_line(line1, line2, color1='b', color2='y', color_in='g', color_out='w'):
+def check_intersect_line(line1, line2, color1='orange', color2='green', color_in='purple', color_out='w'):
     line = np.zeros(4)
     attr = []
     is_intersect = True
