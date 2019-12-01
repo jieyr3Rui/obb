@@ -9,6 +9,7 @@ from utils.check_intersect import check_intersect_polygon, check_intersect_line
 from box import box_3d
 
 def obb_3d_check_face(o1, o2):
+    result = True
     plt.figure(figsize=[15, 10])
     pos = np.array((o1.pos + o2.pos) / 2)
 
@@ -57,6 +58,8 @@ def obb_3d_check_face(o1, o2):
         plot_poly(ax, o2_poly_in_o1, 'green', d='2d')
         plot_poly(ax, poly_gjk,      'yellow', d='2d')
         check = 'true' if is_intersect == True else 'false'
+        if is_intersect == False:
+            result = False 
         plt.title('is_intersect = ' +  check)
         plt.grid()
 
@@ -64,9 +67,10 @@ def obb_3d_check_face(o1, o2):
     plt.show()
     
     
-    return
+    return result
 
 def obb_3d_check_line(o1, o2):
+    result = True
     plt.figure(figsize=[10, 10])
     pos = np.array((o1.pos + o2.pos)/2)
     for ii in range(3):
@@ -91,18 +95,24 @@ def obb_3d_check_line(o1, o2):
             plot_line(ax, line_in_world[:, 2], line_in_world[:,3], attr[2])
             check = 'true' if is_intersect == True else 'false'
             plt.title('is_intersect = ' +  check)
+            if is_intersect == False:
+                result = False 
 
     plt.savefig('images_output/check_line.png')
     plt.show()
-    
 
-
-    return
+    return result
 
 def obb_3d_check(o1, o2):
-    # face
-    
-    obb_3d_check_face(o1, o2)
-    obb_3d_check_face(o2, o1)
-    obb_3d_check_line(o1, o2)
-    return
+    # face o1
+    result = True
+    if obb_3d_check_face(o1, o2) == False:
+        result = False
+    # face o2
+    if obb_3d_check_face(o2, o1) == False:
+        result == False
+    # line
+    if obb_3d_check_line(o1, o2) == False:
+        result = False
+
+    return result
