@@ -26,7 +26,7 @@ def plot_poly(ax, point, color, d='3d'):
     if d == '3d':
         n = point.shape[1]
         for ii in range(n-1):
-            l_plot = np.linspace(point[:, ii], point[:, ii+1], num = 50)
+            l_plot = np.linspace(point[:, ii], point[:, ii+1], num=50)
             ax.plot(l_plot[: ,0], l_plot[: ,1], l_plot[: ,2], c=color)
         l_plot = np.linspace(point[:, n-1], point[:, 0], num = 50)
         ax.plot(l_plot[: ,0], l_plot[: ,1], l_plot[: ,2], c=color)
@@ -38,3 +38,13 @@ def plot_poly(ax, point, color, d='3d'):
         l_plot = np.linspace(point[:, n-1], point[:, 0], num = 50)
         ax.plot(l_plot[: ,0], l_plot[: ,1], c=color)
 
+def plot_line(ax, point1, point2, color, d='3d'):
+    if d == '3d':
+        line = np.linspace(point1, point2, num=50)
+        ax.plot(line[:,0], line[:,1], line[:,2], c=color)
+        return
+    if d == '2d':
+        x = np.linspace(point1, point1, num=50)
+        y = np.zeros_like(x)
+        ax.plot(x, y, c=color)
+    return
